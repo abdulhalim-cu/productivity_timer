@@ -43,15 +43,22 @@ class TimerHomePage extends StatelessWidget {
                 children: [
                   Padding(padding: EdgeInsets.all(defaultPadding)),
                   Expanded(
-                      child: ProductivityButton(color: Color(0xFF009688), text: 'Work', onPressed: () {}, size: null)),
+                      child: ProductivityButton(
+                          color: Color(0xFF009688), text: 'Work', onPressed: () => timer.startWork(), size: null)),
                   Padding(padding: EdgeInsets.all(defaultPadding)),
                   Expanded(
                       child: ProductivityButton(
-                          color: Color(0xFF607D88), text: 'Short Break', onPressed: () {}, size: null)),
+                          color: Color(0xFF607D88),
+                          text: 'Short Break',
+                          onPressed: () => timer.startBreak(true),
+                          size: null)),
                   Padding(padding: EdgeInsets.all(defaultPadding)),
                   Expanded(
                       child: ProductivityButton(
-                          color: Color(0xFF455A64), text: 'Long Break', onPressed: () {}, size: null)),
+                          color: Color(0xFF455A64),
+                          text: 'Long Break',
+                          onPressed: () => timer.startBreak(false),
+                          size: null)),
                 ],
               ),
               StreamBuilder(
@@ -77,11 +84,12 @@ class TimerHomePage extends StatelessWidget {
                 children: [
                   Padding(padding: EdgeInsets.all(defaultPadding)),
                   Expanded(
-                      child: ProductivityButton(color: Color(0xFF009688), text: 'Stop', onPressed: () {}, size: null)),
+                      child: ProductivityButton(
+                          color: Color(0xFF009688), text: 'Stop', onPressed: () => timer.stopTimer(), size: null)),
                   Padding(padding: EdgeInsets.all(defaultPadding)),
                   Expanded(
-                      child:
-                          ProductivityButton(color: Color(0xFF607D88), text: 'Restart', onPressed: () {}, size: null)),
+                      child: ProductivityButton(
+                          color: Color(0xFF607D88), text: 'Restart', onPressed: () => timer.startTimer(), size: null)),
                 ],
               ),
             ],
