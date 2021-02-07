@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:productivity_timer/settings.dart';
 import 'package:productivity_timer/timer.dart';
 import 'package:productivity_timer/timer_model.dart';
 import 'package:productivity_timer/widgets.dart';
@@ -30,9 +31,28 @@ class TimerHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     timer.startWork();
+
+    final List<PopupMenuItem<String>> menuItems = List<PopupMenuItem<String>>();
+    menuItems.add(PopupMenuItem(
+      child: Text('Settings'),
+      value: 'Settings',
+    ));
+
     return Scaffold(
       appBar: AppBar(
         title: Text('My Work Time'),
+        actions: [
+          PopupMenuButton(
+            itemBuilder: (BuildContext context) {
+              return menuItems.toList();
+            },
+            onSelected: (s) {
+              if (s == 'Settings') {
+                goToSettings(context);
+              }
+            },
+          )
+        ],
       ),
       body: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
@@ -97,5 +117,9 @@ class TimerHomePage extends StatelessWidget {
         },
       ),
     );
+  }
+
+  void goToSettings(BuildContext context) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => SettingsScreen()));
   }
 }
